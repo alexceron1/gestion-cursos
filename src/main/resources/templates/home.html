@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Cursos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar navbar-light bg-light border-bottom mb-4">
+    <div class="container">
+        <span class="navbar-brand">Institución Educativa CCSFA</span>
+        <a href="/admin" class="btn btn-dark btn-sm">
+            ⚙️ Panel Admin
+        </a>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <div class="p-5 text-center bg-body-tertiary rounded-3">
+        <h1 class="text-body-emphasis">Bienvenido al Sistema de Cursos</h1>
+        <p class="lead">
+            Gestión centralizada de cursos libres: Cocina, Contabilidad, Mecánica y más.
+        </p>
+        <div class="d-inline-flex gap-2 mb-5">
+            <button class="btn btn-primary btn-lg px-4" type="button">
+                Ver Cursos
+            </button>
+            <a href="/donaciones" class="btn btn-outline-secondary btn-lg px-4">
+                Hacer Donación
+            </a>
+        </div>
+    </div>
+
+</div>
+
+<div class="container mb-5">
+    <h2 class="text-center mb-4">Nuestros Cursos Disponibles</h2>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col" th:each="curso : ${misCursos}">
+            <div class="card h-100 shadow-sm">
+                <img th:src="${curso.imagenUrl}" class="card-img-top" alt="Imagen del curso" style="height: 200px; object-fit: cover;">
+
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${curso.titulo}">Título del Curso</h5>
+
+                    <p class="card-text" th:text="${curso.descripcion}">Descripción...</p>
+
+                    <ul class="list-group list-group-flush mb-3">
+                        <li class="list-group-item">
+                            📅 Inicio: <strong th:text="${curso.fechaInicio}">Fecha</strong>
+                        </li>
+                        <li class="list-group-item">
+                            👥 Cupos: <span th:text="${curso.cupoMaximo}">0</span>
+                        </li>
+                    </ul>
+
+                    <a th:href="@{/inscripcion/{id}(id=${curso.id})}" class="btn btn-primary w-100">Inscribirme</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
